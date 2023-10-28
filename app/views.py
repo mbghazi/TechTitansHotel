@@ -1,7 +1,8 @@
 from datetime import datetime
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpRequest
 from .models import Room
+from .forms import ReservationForm
 
 def home(request):
     """Renders the home page."""
@@ -44,4 +45,15 @@ def room_list(request):
 
 def room_detail(request, room_id):
     room = get_object_or_404(Room, id=room_id)
-    return render(request, 'app/room_detail.html', {'room': room})
+    
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            reservation = form.save(commit=False)
+            reservation.room = room
+            reservation.save()
+            return redirect('room_detail', room_id=room.id)
+    else:
+        form = ReservationForm()
+    
+    return render(request, 'app/room_detail.html', {'room': room, 'form': form})

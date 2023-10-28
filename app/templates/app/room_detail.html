@@ -6,7 +6,22 @@
 <body>
     <h1>{{ room.room_number }} - {{ room.room_type }}</h1>
     <p>Price per night: ${{ room.price_per_night }}</p>
-    <p>Status: {{ room.is_available|yesno:"Available,Not Available" }}</p>
+    <p>Status: {% if room.is_available %}Available{% else %}Not Available{% endif %}</p>
     <a href="{% url 'room_list' %}">Back to Room List</a>
+
+    <h2>Make a Reservation</h2>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Reserve</button>
+    </form>
 </body>
 </html>

@@ -29,6 +29,16 @@ ALLOWED_HOSTS = []
 
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
+
+# Middleware framework
+# https://docs.djangoproject.com/en/2.1/topics/http/middleware/
+
+ROOT_URLCONF = 'TechTitansHotel2.urls'
+
+# Template configuration
+# https://docs.djangoproject.com/en/2.1/topics/templates/
+
+
 INSTALLED_APPS = [
     'app',
     # Add your apps here to enable them
@@ -40,8 +50,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# Middleware framework
-# https://docs.djangoproject.com/en/2.1/topics/http/middleware/
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,10 +60,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'TechTitansHotel2.urls'
-
-# Template configuration
-# https://docs.djangoproject.com/en/2.1/topics/templates/
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -71,6 +75,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'TechTitansHotel2.wsgi.application'
 # Database
