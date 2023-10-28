@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ room.room_number }} - {{ room.room_type }}</title>
+</head>
+<body>
+    <h1>{{ room.room_number }} - {{ room.room_type }}</h1>
+    <p>Price per night: ${{ room.price_per_night }}</p>
+    <p>Status: {{ room.is_available|yesno:"Available,Not Available" }}</p>
+    <a href="{% url 'room_list' %}">Back to Room List</a>
+</body>
+</html>
