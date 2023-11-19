@@ -51,7 +51,7 @@ class ReservationForm(forms.ModelForm):
 class RoomServiceForm(forms.ModelForm):  # Renamed from ServiceForm to RoomServiceForm
     class Meta:
         model = RoomService  # Updated model reference
-        fields = ['room', 'name', 'price', 'description', 'is_active']  # Updated fields
+        fields = ['room', 'service', 'date', 'quantity']
         widgets = {
             'room': forms.Select(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),

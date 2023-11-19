@@ -14,8 +14,9 @@ class ReservationAdmin(admin.ModelAdmin):
     search_fields = ('guest__first_name', 'guest__last_name', 'room__room_number')
 
 class RoomServiceAdmin(admin.ModelAdmin):
-    list_display = ('room', 'name', 'price', 'is_active')
-    search_fields = ('name', 'room__room_number')
+    list_display = ('room', 'service', 'date', 'quantity')
+    search_fields = ('room__room_number', 'service__name')
+
 
 # Models registration below
 admin.site.register(Room, RoomAdmin)
