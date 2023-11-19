@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Room, Guest, Reservation, Service
+from .models import Room, Guest, Reservation, RoomService
 
 class RoomAdmin(admin.ModelAdmin):
     list_display = ('room_number', 'room_type', 'price_per_night', 'is_available')
@@ -10,14 +10,12 @@ class GuestAdmin(admin.ModelAdmin):
     search_fields = ('first_name', 'last_name', 'email')
 
 class ReservationAdmin(admin.ModelAdmin):
+
+
+class RoomServiceAdmin(admin.ModelAdmin):
+    list_display = ('room', 'name', 'price', 'is_active')
+    search_fields = ('name', 'room__room_number')
+admin.site.register(RoomService, RoomServiceAdmin)
     list_display = ('guest', 'room', 'check_in', 'check_out')
     search_fields = ('guest__first_name', 'guest__last_name', 'room__room_number')
 
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price')
-    search_fields = ('name',)
-
-admin.site.register(Room, RoomAdmin)
-admin.site.register(Guest, GuestAdmin)
-admin.site.register(Reservation, ReservationAdmin)
-admin.site.register(Service, ServiceAdmin)
