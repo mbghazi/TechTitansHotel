@@ -10,12 +10,15 @@ class GuestAdmin(admin.ModelAdmin):
     search_fields = ('first_name', 'last_name', 'email')
 
 class ReservationAdmin(admin.ModelAdmin):
-
+    list_display = ('guest', 'room', 'check_in_date', 'check_out_date')
+    search_fields = ('guest__first_name', 'guest__last_name', 'room__room_number')
 
 class RoomServiceAdmin(admin.ModelAdmin):
     list_display = ('room', 'name', 'price', 'is_active')
     search_fields = ('name', 'room__room_number')
-admin.site.register(RoomService, RoomServiceAdmin)
-    list_display = ('guest', 'room', 'check_in', 'check_out')
-    search_fields = ('guest__first_name', 'guest__last_name', 'room__room_number')
 
+# Models registration below
+admin.site.register(Room, RoomAdmin)
+admin.site.register(Guest, GuestAdmin)
+admin.site.register(Reservation, ReservationAdmin)
+admin.site.register(RoomService, RoomServiceAdmin)

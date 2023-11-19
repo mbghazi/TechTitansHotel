@@ -1,5 +1,5 @@
 from django import forms
-from .models import Room, Guest, Reservation, Service
+from .models import Room, Guest, Reservation, RoomService  # Updated import here
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 
@@ -48,11 +48,14 @@ class ReservationForm(forms.ModelForm):
             'total_price': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
-class ServiceForm(forms.ModelForm):
+class RoomServiceForm(forms.ModelForm):  # Renamed from ServiceForm to RoomServiceForm
     class Meta:
-        model = Service
-        fields = ['name', 'price']
+        model = RoomService  # Updated model reference
+        fields = ['room', 'name', 'price', 'description', 'is_active']  # Updated fields
         widgets = {
+            'room': forms.Select(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
