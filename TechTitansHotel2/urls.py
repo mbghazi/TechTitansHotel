@@ -7,6 +7,19 @@ from django.urls import path
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from app import forms, views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from app.views import RoomViewSet
+
+router = DefaultRouter()
+router.register(r'rooms', RoomViewSet)
+
+urlpatterns = [
+    # ... your other url patterns, ADD THEM AS YOU GO ALONE AND ADD FUNCTIONALITY ...
+    path('api/', include(router.urls)),
+]
+
+
 
 urlpatterns = [
     # Application-specific URLs

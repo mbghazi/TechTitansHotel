@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application references
+'rest_framework',
+    
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
 
 # Middleware framework
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',    
 ]
 
 MIDDLEWARE = [

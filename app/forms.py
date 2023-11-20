@@ -1,6 +1,6 @@
 from django import forms
-from .models import Room, Guest, Reservation, RoomService  # Updated import here
 from django.contrib.auth.forms import AuthenticationForm
+from .models import Room, Guest, Reservation, RoomService, GeneralService, ReservationService
 from django.utils.translation import gettext_lazy as _
 
 class BootstrapAuthenticationForm(AuthenticationForm):

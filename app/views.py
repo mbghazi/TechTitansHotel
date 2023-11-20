@@ -3,6 +3,15 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpRequest
 from .models import Room
 from .forms import ReservationForm
+from rest_framework import viewsets
+from .models import Room
+from .serializers import RoomSerializer
+
+class RoomViewSet(viewsets.ModelViewSet):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+
+
 
 def home(request):
     """Renders the home page."""
