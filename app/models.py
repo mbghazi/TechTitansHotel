@@ -4,6 +4,26 @@ Definition of models.
 
 from django.db import models
 from django.utils import timezone
+from django.db import models
+from django.contrib.auth.models import User, Group
+from django.db import models
+
+class UserProfile(models.Model):
+    ROLE_CHOICES = (
+        ('concierge', 'Concierge'),
+        ('guest', 'Guest'),
+    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=30)
+    groups = models.ManyToManyField(Group)
+
+    def __str__(self):
+        return self.user.username
+
+    def save(self, *args, **kwargs):
+        super(UserProfile, self).save(*args, **kwargs)
+        group, _ = Group.objects.get_or_create(name=self.role)
+        self.user.groups.add(group)
 
 
 class Room(models.Model):
