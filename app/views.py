@@ -9,6 +9,21 @@ from .serializers import RoomSerializer
 from rest_framework import generics
 from .models import Room
 from .serializers import RoomSerializer
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
+
+class RegisterView(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'app/register.html'
+
+
 
 class RoomListCreateView(generics.ListCreateAPIView):
     queryset = Room.objects.all()
@@ -17,8 +32,6 @@ class RoomListCreateView(generics.ListCreateAPIView):
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
-
-
 
 def home(request):
     """Renders the home page."""
