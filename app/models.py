@@ -3,6 +3,8 @@ Definition of models.
 """
 
 from django.db import models
+from django.utils import timezone
+
 
 class Room(models.Model):
     room_number = models.CharField(max_length=10, unique=True)
@@ -34,7 +36,11 @@ class Reservation(models.Model):
         services = ReservationService.objects.filter(reservation=self)
         for service in services:
             total_price += service.service.price * service.quantity
-        return total_price
+        return total_price  
+    def calculate_total_cost(self):
+        room_cost = self.room.price_per_night  
+        service_costs = sum([service.price for service in self.room.roomservice_set.all()])
+        return room_cost + service_costs          
 
     def __str__(self):
         return f"Reservation for {self.guest} - Room {self.room}"
@@ -48,17 +54,32 @@ class Service(models.Model):
         return self.name
 
 class RoomService(models.Model):
+    SERVICE_TYPES = [
+        ('LAUNDRY', 'Laundry'),
+        ('TAXI', 'Taxi Service'),
+        ('FOOD', 'Food/Drink'),
+    ]
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    service_type = models.CharField(max_length=50, choices=SERVICE_TYPES, default='LAUNDRY')
+    requested_time = models.DateTimeField(default=timezone.now)    
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     date = models.DateField()
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return f"{self.service.name} for Room {self.room.room_number} on {self.date}"
+        return f"{self.service.name} for Room {self.room.room_number} on {self.date}"    
 
+class GeneralService(models.Model):
+    SERVICE_TYPES = [
+        ('TAXI', 'Taxi Service'),
+     ]
+    guest = models.ForeignKey(Guest, on_delete=models.CASCADE)
+    service_type = models.CharField(max_length=50, choices=SERVICE_TYPES)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    description = models.TextField()
 
 class ReservationService(models.Model):
-    reservation = models.ForeignKey('Reservation', on_delete=models.CASCADE)  # Using string reference to avoid errors
+    reservation = models.ForeignKey('Reservation', on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     date = models.DateField()
     quantity = models.IntegerField(default=1)

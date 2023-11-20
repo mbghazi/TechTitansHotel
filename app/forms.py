@@ -59,3 +59,24 @@ class RoomServiceForm(forms.ModelForm):  # Renamed from ServiceForm to RoomServi
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
+class GeneralServiceForm(forms.ModelForm):
+    class Meta:
+        model = GeneralService
+        fields = ['guest', 'service_type', 'price', 'description']
+        widgets = {
+            'guest': forms.Select(attrs={'class': 'form-control'}),
+            'service_type': forms.Select(attrs={'class': 'form-control'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+class ReservationServiceForm(forms.ModelForm):
+    class Meta:
+        model = ReservationService
+        fields = ['reservation', 'service', 'date', 'quantity']
+        widgets = {
+            'reservation': forms.Select(attrs={'class': 'form-control'}),
+            'service': forms.Select(attrs={'class': 'form-control'}),
+            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
