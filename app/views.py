@@ -6,6 +6,13 @@ from .forms import ReservationForm
 from rest_framework import viewsets
 from .models import Room
 from .serializers import RoomSerializer
+from rest_framework import generics
+from .models import Room
+from .serializers import RoomSerializer
+
+class RoomListCreateView(generics.ListCreateAPIView):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
 
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()

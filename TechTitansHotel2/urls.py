@@ -1,25 +1,14 @@
-"""
-Definition of urls for TechTitansHotel2.
-"""
-
-from datetime import datetime
-from django.urls import path
+from django.urls import path, include
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from app import forms, views
-from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from app.views import RoomViewSet
+from app.views import RoomViewSet, RoomListCreateView
+from django.urls import path, include
 
+# Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'rooms', RoomViewSet)
-
-urlpatterns = [
-    # ... your other url patterns, ADD THEM AS YOU GO ALONE AND ADD FUNCTIONALITY ...
-    path('api/', include(router.urls)),
-]
-
-
 
 urlpatterns = [
     # Application-specific URLs
@@ -28,6 +17,11 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('rooms/', views.room_list, name='room_list'),
     path('rooms/<int:room_id>/', views.room_detail, name='room_detail'),
+    path('admin/', admin.site.urls),
+    path('api/', include('app.urls')),
+    # API URLs
+    path('api/', include(router.urls)),
+    path('api/room-list/', RoomListCreateView.as_view(), name='room-list-create'),
 
     # Authentication-related URLs
     path('login/',
