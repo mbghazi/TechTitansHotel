@@ -8,3 +8,8 @@
 <p>Use this area to provide additional information.</p>
 
 {% endblock %}
+{% if request.user.groups.filter(name='concierge').exists %}
+<!-- Content for concierge -->
+{% else %}
+<!-- Content for guests -->
+{% endif %}
