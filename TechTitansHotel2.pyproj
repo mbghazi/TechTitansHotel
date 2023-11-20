@@ -57,6 +57,10 @@
     <Folder Include="app\static\app\scripts\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
+    <Folder Include="static\static\" />
+    <Folder Include="static\static\css\" />
+    <Folder Include="static\static\js\" />
+    <Folder Include="static\static\media\" />
     <Folder Include="TechTitansHotel2\" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +97,21 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
+    <Content Include="static\asset-manifest.json" />
+    <Content Include="static\favicon.ico" />
+    <Content Include="static\index.html" />
+    <Content Include="static\logo192.png" />
+    <Content Include="static\logo512.png" />
+    <Content Include="static\manifest.json" />
+    <Content Include="static\robots.txt" />
+    <Content Include="static\static\css\main.3255d995.css" />
+    <Content Include="static\static\css\main.3255d995.css.map" />
+    <Content Include="static\static\js\787.8cea06a0.chunk.js" />
+    <Content Include="static\static\js\787.8cea06a0.chunk.js.map" />
+    <Content Include="static\static\js\main.e8fe7aaf.js" />
+    <Content Include="static\static\js\main.e8fe7aaf.js.LICENSE.txt" />
+    <Content Include="static\static\js\main.e8fe7aaf.js.map" />
+    <Content Include="static\static\media\Hotel.a2d1e934ea4c5db133f0.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md">
