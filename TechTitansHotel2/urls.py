@@ -4,6 +4,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from app import views
 from app.forms import BootstrapAuthenticationForm
 from app.views import RegisterView
+from django.views.generic import TemplateView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,4 +24,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
     path('api/', include('app.urls')),
+    path('', TemplateView.as_view(template_name='index.html')),
+    
+
 ]

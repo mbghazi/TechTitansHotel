@@ -1413,3 +1413,8 @@ window.Modernizr = (function( window, document, undefined ) {
     return Modernizr;
 
 })(this, this.document);
+componentDidMount() {
+    fetch('/api/users/')
+        .then(response => response.json())
+        .then(data => this.setState({ users: data }));
+}

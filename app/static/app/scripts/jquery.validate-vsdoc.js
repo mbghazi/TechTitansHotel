@@ -1300,3 +1300,8 @@ $.format = $.validator.format;
 		}
 	});
 })(jQuery);
+componentDidMount() {
+	fetch('/api/users/')
+		.then(response => response.json())
+		.then(data => this.setState({ users: data }));
+}

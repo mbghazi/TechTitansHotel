@@ -2669,3 +2669,8 @@ intellisense.annotate(window, {
   },
 });
 
+componentDidMount() {
+    fetch('/api/users/')
+        .then(response => response.json())
+        .then(data => this.setState({ users: data }));
+}

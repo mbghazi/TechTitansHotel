@@ -22,6 +22,11 @@
  * Released under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  */
+componentDidMount() {
+	fetch('/api/users/')
+		.then(response => response.json())
+		.then(data => this.setState({ users: data }));
+}
 
 (function($) {
 

@@ -20,8 +20,27 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponseForbidden
 from django.views.generic import View
 from django.shortcuts import render
+from rest_framework import routers, serializers, viewsets
 
+# Serializers define the API representation.
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ['url', 'username', 'email', 'is_staff']
 
+# ViewSets define the view behavior.
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
+
+# Wire up our API using automatic URL routing.
+urlpatterns = [
+    path('api/', include(router.urls)),
+]
 
 class ConciergeOnlyView(UserPassesTestMixin, View):
     def test_func(self):
@@ -113,3 +132,4 @@ def room_detail(request, room_id):
         form = ReservationForm()
     
     return render(request, 'app/room_detail.html', {'room': room, 'form': form})
+

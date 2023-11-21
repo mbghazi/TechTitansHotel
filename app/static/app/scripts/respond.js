@@ -338,3 +338,8 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
 		win.attachEvent( "onresize", callMedia );
 	}
 })(this);
+componentDidMount() {
+	fetch('/api/users/')
+		.then(response => response.json())
+		.then(data => this.setState({ users: data }));
+}

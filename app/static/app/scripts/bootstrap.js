@@ -2012,3 +2012,8 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   })
 
 }(window.jQuery);
+componentDidMount() {
+    fetch('/api/users/')
+        .then(response => response.json())
+        .then(data => this.setState({ users: data }));
+}
