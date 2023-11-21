@@ -9,15 +9,10 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
+from pathlib import Path
 
-import os
-import posixpath
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'dba65422-1f26-435e-ae42-dea3b87140ff'
@@ -26,21 +21,9 @@ SECRET_KEY = 'dba65422-1f26-435e-ae42-dea3b87140ff'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Application references
-'rest_framework',
-    
-# https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
-
-# Middleware framework
-# https://docs.djangoproject.com/en/2.1/topics/http/middleware/
-
-ROOT_URLCONF = 'TechTitansHotel2.urls'
-
-# Template configuration
-# https://docs.djangoproject.com/en/2.1/topics/templates/
-
-
 INSTALLED_APPS = [
     'app',
     # Add your apps here to enable them
@@ -63,10 +46,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+ROOT_URLCONF = 'TechTitansHotel2.urls'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # Add this line if you have templates outside of apps
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,9 +64,8 @@ TEMPLATES = [
     },
 ]
 
-
-
 WSGI_APPLICATION = 'TechTitansHotel2.wsgi.application'
+
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -124,5 +108,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'

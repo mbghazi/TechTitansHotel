@@ -19,6 +19,8 @@ from django.http import HttpResponseForbidden
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponseForbidden
 from django.views.generic import View
+from django.shortcuts import render
+
 
 
 class ConciergeOnlyView(UserPassesTestMixin, View):
@@ -55,16 +57,19 @@ class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
+
 def home(request):
-    """Renders the home page."""
+    is_concierge = request.user.groups.filter(name='concierge').exists()
     return render(
         request,
-        'app/index.html',
+        'app/layout.html',
         {
             'title': 'Home Page',
             'year': datetime.now().year,
+            'is_concierge': is_concierge,  # Pass a simple boolean variable
         }
     )
+
 
 def contact(request):
     """Renders the contact page."""

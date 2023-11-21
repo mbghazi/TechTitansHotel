@@ -14,7 +14,7 @@
 </ul>
 
 {% endif %}
-{% if request.user.groups.filter(name='concierge').exists %}
+{% if is_concierge %}
 <!-- Content for concierge -->
 {% else %}
 <!-- Content for guests -->
