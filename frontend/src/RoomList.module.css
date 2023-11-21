@@ -1,0 +1,9 @@
+.roomList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.roomItem {
+    margin-bottom: 10px;
+    font-size: 18px;
+}

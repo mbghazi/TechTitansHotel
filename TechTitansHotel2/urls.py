@@ -5,6 +5,8 @@ from app import views
 from app.forms import BootstrapAuthenticationForm
 from app.views import RegisterView
 from django.views.generic import TemplateView
+from django.urls import path, include
+
 
 
 urlpatterns = [

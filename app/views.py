@@ -21,6 +21,10 @@ from django.http import HttpResponseForbidden
 from django.views.generic import View
 from django.shortcuts import render
 from rest_framework import routers, serializers, viewsets
+from django.contrib.auth.models import User
+from django.urls import path, include
+
+
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
